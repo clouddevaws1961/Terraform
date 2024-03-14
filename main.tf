@@ -1,5 +1,6 @@
 provider "aws" {
   region = "ap-south-1"
+  
 }
 
 module "networking" {
@@ -27,3 +28,5 @@ module "JenkinsServer" {
   publickeyjenkins              = file("~/.ssh/instanceaws.pub")
   awsjenkinssecuritygroup       = module.Security-Groups.outputSecurityId
 }
+
+
