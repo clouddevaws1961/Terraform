@@ -26,4 +26,5 @@ module "JenkinsServer" {
   subnet_id                     = tolist(module.networking.publicSubnet)[0]
   publickeyjenkins              = file("~/.ssh/instanceaws.pub")
   awsjenkinssecuritygroup       = module.Security-Groups.outputSecurityId
+
 }
