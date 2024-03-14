@@ -1,7 +1,6 @@
 provider "aws" {
   region = "ap-south-1"
 }
-
 module "networking" {
   source            = "./Networking"
   vpc_cidr          = var.vpc_cidr
