@@ -6,9 +6,9 @@ output "outputSecurityId" {
 }
 
 resource "aws_security_group" "AllNetworkSG" {
-  name = "JenkingSecurityGroup"
+  name = "JenkingSlaveSecurityGroup"
   tags = {
-    Name="JenkingSecurityGroup"
+    Name="JenkingSlaveSecurityGroup"
   }
   vpc_id = var.vpc_id
   ingress = [{ 
