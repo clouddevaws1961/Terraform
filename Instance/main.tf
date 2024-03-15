@@ -1,4 +1,4 @@
-resource "aws_instance" "JenkinsServer" {
+resource "aws_instance" "JenkinsSlaveServer" {
   ami = var.ami
   disable_api_termination = true
   key_name = aws_key_pair.LinuxInstanceKeyPair.key_name
@@ -9,7 +9,7 @@ resource "aws_instance" "JenkinsServer" {
   
   vpc_security_group_ids = [var.awsjenkinssecuritygroup]
   tags = {
-    Name="Jenkins Server"
+    Name="Jenkins Slave Server"
   }
 }
 

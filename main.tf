@@ -16,7 +16,7 @@ module "Security-Groups" {
 }
 
 
-module "JenkinsServer" {
+module "JenkinsSlaveServer" {
   source                        = "./Instance"
   ami                           = var.ami
   instance_type                 = "t2.micro"
