@@ -8,10 +8,10 @@ variable "associate_public_ip_address" {}
 
 variable "user_data" {}
 
-variable "publickeyjenkins" {}
+variable "publickeyInstance" {}
 
-variable "key_name" {
-  
-}
+variable "key_name" {}
 
-variable "awsjenkinssecuritygroup" {}
+variable "awsSecuritygroup" {}
+
+variable "instanceTag" {}

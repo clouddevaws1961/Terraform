@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+    stages {
+        stage('Terraform checkout'){
+            steps {
+                script{
+                    try {
+                        echo "checkout started"
+                        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitTerraformSecrets', url: 'https://github.com/clouddevaws1961/Terraform.git']])
+                    } catch (Exception e)
+                    {
+                       mail bcc: '', body: e, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
+                        sh "exit 1"
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Init'){
+            steps{
+                script{
+                   try{
+                        echo "terraform init"
+                   } catch {
+                        mail bcc: '', body: e, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
+                   }
+                }
+            }
+        }
+
+        stage('Terraform Plan'){
+            steps{
+                script{
+                     terraformplan= sh 'Terraform plan'
+                     mail bcc: '', body: $terraformplan, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
+                }
+            }
+        }
+
+        stage('Terraform apply'){
+            steps{
+                sh 'Terraform init'
+            }
+        }
+
+    }
+
+   
+}
