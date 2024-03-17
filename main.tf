@@ -43,7 +43,6 @@ module "JenkinsServer" {
   awsSecuritygroup              = module.Security-Groups.outputSecurityId
   instanceTag                   ="JenkinsServer"
   privatekeypath                ="~/.ssh/jenkins" 
-
 }
 
 module "dockerKey-pair" {
