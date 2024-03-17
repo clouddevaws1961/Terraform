@@ -52,18 +52,18 @@ module "dockerKey-pair" {
   publickeyInstance = file("~/.ssh/docker.pub")
 }
 
-# module "DockerServer" {
-#   source                        = "./Instance"
-#   ami                           = var.ami
-#   instance_type                 = "t2.medium"
-#   key_name                      = "dockerkeypair"
-#   associate_public_ip_address   = true
-#   user_data                     = templatefile("/docker-runner-script/docker-installer.sh",{})
-#   subnet_id                     = tolist(module.networking.publicSubnet)[1]
-#   awsSecuritygroup              = module.Security-Groups.outputSecurityId
-#   instanceTag                   ="DockerServer"
-#   privatekeypath                ="~/.ssh/docker"
-# }
+module "DockerServer" {
+  source                        = "./Instance"
+  ami                           = var.ami
+  instance_type                 = "t2.medium"
+  key_name                      = "dockerkeypair"
+  associate_public_ip_address   = true
+  user_data                     = templatefile("/docker-runner-script/docker-installer.sh",{})
+  subnet_id                     = tolist(module.networking.publicSubnet)[1]
+  awsSecuritygroup              = module.Security-Groups.outputSecurityId
+  instanceTag                   ="DockerServer"
+  privatekeypath                ="~/.ssh/docker"
+}
 
 
 
