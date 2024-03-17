@@ -1,47 +1,56 @@
 pipeline {
     agent any
     stages {
-        stage('Terraform checkout'){
+        stage('Terraform Git Checkout'){
             steps {
                 script{
-                    try {
-                        echo "checkout started"
-                        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitTerraformSecrets', url: 'https://github.com/clouddevaws1961/Terraform.git']])
-                    } catch (Exception e)
-                    {
-                       mail bcc: '', body: e, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
-                        sh "exit 1"
-                    }
+                        try 
+                        {
+                            echo "checkout started"
+                            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '436e7979-f55a-4bb6-8afd-1b81716403c8', url: 'https://github.com/clouddevaws1961/Terraform.git']])
+                            sh 'terraform init -input=false -upgrade'
+
+                        } 
+                        catch (Exception e)
+                        {
+                        
+                        }
                 }
             }
         }
 
         stage('Terraform Init'){
-            steps{
-                script{
-                   try{
+            steps {
+                script {
+                    try
+                    {
                         echo "terraform init"
-                   } catch {
-                        mail bcc: '', body: e, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
-                   }
+                        sh ('terraform init')
+                        withAWS(credentials: 'AWSCredential', region: 'ap-south-1') 
+                       
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 }
             }
         }
 
         stage('Terraform Plan'){
-            steps{
-                script{
-                     terraformplan= sh 'Terraform plan'
-                     mail bcc: '', body: $terraformplan, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
+            steps {
+                script {
+                     echo "terraform plan"
+                     sh ('terraform plan')
                 }
             }
         }
 
-        stage('Terraform apply'){
-            steps{
-                sh 'Terraform init'
-            }
-        }
+        // stage('Terraform apply'){
+        //     steps{
+        //         sh 'terraform apply -auto-approve=true'
+        //     }
+        // }
 
     }
 
