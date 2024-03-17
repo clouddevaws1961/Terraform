@@ -14,6 +14,15 @@ variable "key_name" {
     default = null
 }
 
-variable "publickeyjenkins" {}
 
-variable "awsjenkinssecuritygroup" {}
+ variable "awsSecuritygroup" {
+     default = null
+}
+
+variable "instanceTag" {
+    default = null
+}
+
+variable "privatekeypath" {
+    default = null
+}
