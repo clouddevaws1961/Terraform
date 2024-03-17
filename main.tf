@@ -12,12 +12,10 @@ provider "aws" {
 }
 
 #vpc
-resource "aws_vpc" "vpc" {
-  cidr_block = var.vpc_cidr
-  tags = {
-    Name ="GlobalVPC"
-  }
+resource "aws_s3_bucket" "example" {
+  bucket = "dta"
 }
+
 
 # #internet gateway
 # resource "aws_internet_gateway" "igw" {
