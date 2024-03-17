@@ -1,5 +1,6 @@
 provider "aws" {
   region = "ap-south-1"
+  skip_metadata_api_check = trie
 }
 module "networking" {
   source            = "./Networking"
