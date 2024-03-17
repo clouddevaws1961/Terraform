@@ -23,7 +23,7 @@ pipeline {
                     try
                     {
                         echo "terraform init"
-                        sh 'terraform init'
+                        sh 'terraform init -input=false -upgrade'
                         withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWSCredential', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])                                 
                     }
                     catch (Exception e)
