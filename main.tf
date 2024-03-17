@@ -25,21 +25,22 @@ module "jenkinsKey-pair" {
 module "JenkinsServer" {
   source                        = "./Instance"
   ami                           = var.ami
-  instance_type                 = "t2.medium"
+  instance_type                 = "t2.large"
   key_name                      = "jenkinskeypair"
   associate_public_ip_address   = true
   user_data                     = templatefile("/jenkins-runner-script/jenkins-installer.sh",{})
   subnet_id                     = tolist(module.networking.publicSubnet)[0]
-  publickeyInstance             = file("~/.ssh/jenkins.pub")
   awsSecuritygroup              = module.Security-Groups.outputSecurityId
   instanceTag                   ="JenkinsServer"
+  privatekeypath                ="~/.ssh/jenkins" 
+
 }
 
-# module "dockerKey-pair" {
-#   source = "./key-pair"
-#   key_name ="dockerkeypair" 
-#   publickeyInstance = file("~/.ssh/docker.pub")
-# }
+module "dockerKey-pair" {
+  source = "./key-pair"
+  key_name ="dockerkeypair" 
+  publickeyInstance = file("~/.ssh/docker.pub")
+}
 
 # module "DockerServer" {
 #   source                        = "./Instance"
@@ -49,9 +50,9 @@ module "JenkinsServer" {
 #   associate_public_ip_address   = true
 #   user_data                     = templatefile("/docker-runner-script/docker-installer.sh",{})
 #   subnet_id                     = tolist(module.networking.publicSubnet)[1]
-#   publickeyInstance             = file("~/.ssh/docker.pub")
 #   awsSecuritygroup              = module.Security-Groups.outputSecurityId
 #   instanceTag                   ="DockerServer"
+#   privatekeypath                ="~/.ssh/docker"
 # }
 
 

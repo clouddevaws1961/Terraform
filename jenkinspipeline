@@ -9,7 +9,7 @@ pipeline {
                         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitTerraformSecrets', url: 'https://github.com/clouddevaws1961/Terraform.git']])
                     } catch (Exception e)
                     {
-                       mail bcc: '', body: e, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
+                        mail bcc: '', body: e, cc: '', from: 'cloudclouddevaws1961@gmail.com', replyTo: '', subject: 'EmailJenkinsPipeline', to: 'sandygsingh1961@gmail.com' 
                         sh "exit 1"
                     }
                 }
