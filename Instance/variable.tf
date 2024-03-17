@@ -9,6 +9,7 @@ variable "associate_public_ip_address" {}
 variable "user_data" {}
 
 variable "key_name" {}
+variable "publickeyInstance" {}
 
 variable "awsSecuritygroup" {}
 
