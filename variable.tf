@@ -1,28 +1,36 @@
-variable "vpc_cidr" {}
+variable "vpc_cidr" {
+ }
 
-variable "public_subnets" {}
+variable "public_subnets" {
+}
 
-variable "public_subnets_az" {}
+variable "public_subnets_az" {
+}
 
-variable "private_subnets" {}
+variable "public_subnets_tag" {
+  type = list
+  default = ["PublicSubnet","PublicSubnet1","PublicSubnet2"]
+}
 
-variable "private_subnets_az" {}
+variable "private_subnets_tag" {
+  type = list
+  default = ["PrivateSubnet"]
+}
 
-variable "ami" {}
+variable "private_subnets" {
+}
 
-variable "key_name" {
-    default = null
+variable "private_subnets_az" {
+}
+
+output "outputVPCid" {
+  value = aws_vpc.vpc.id
+}
+
+output "publicSubnet" {
+  value = aws_subnet.publicsubnets.*.id
 }
 
 
- variable "awsSecuritygroup" {
-     default = null
-}
 
-variable "instanceTag" {
-    default = null
-}
 
-variable "privatekeypath" {
-    default = null
-}
