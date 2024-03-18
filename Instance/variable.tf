@@ -13,5 +13,3 @@ variable "key_name" {}
 variable "awsSecuritygroup" {}
 
 variable "instanceTag" {}
-
-variable "privatekeypath" {}
