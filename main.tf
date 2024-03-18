@@ -24,32 +24,32 @@ module "Security-Groups" {
   vpc_id = module.networking.outputVPCid
 }
 
-module "jenkinsKey-pair" {
-  source = "./key-pair"
-  key_name ="jenkinskeypair" 
-  publickeyInstance = file("~/.ssh/jenkins.pub")
-}
+# module "jenkinsKey-pair" {
+#   source = "./key-pair"
+#   key_name ="jenkinskeypair" 
+#   publickeyInstance = file("~/.ssh/jenkins.pub")
+# }
 
 
-module "JenkinsServer" {
-  source                        = "./Instance"
-  ami                           = var.ami
-  instance_type                 = "t2.large"
-  key_name                      = "jenkinskeypair"
-  associate_public_ip_address   = true
-  user_data                     = templatefile("/jenkins-runner-script/jenkins-installer.sh",{})
-  subnet_id                     = tolist(module.networking.publicSubnet)[0]
-  awsSecuritygroup              = module.Security-Groups.outputSecurityId
-  instanceTag                   ="JenkinsServer"
-  privatekeypath                ="~/.ssh/jenkins" 
+# module "JenkinsServer" {
+#   source                        = "./Instance"
+#   ami                           = var.ami
+#   instance_type                 = "t2.large"
+#   key_name                      = "jenkinskeypair"
+#   associate_public_ip_address   = true
+#   user_data                     = templatefile("/jenkins-runner-script/jenkins-installer.sh",{})
+#   subnet_id                     = tolist(module.networking.publicSubnet)[0]
+#   awsSecuritygroup              = module.Security-Groups.outputSecurityId
+#   instanceTag                   ="JenkinsServer"
+#   privatekeypath                ="~/.ssh/jenkins" 
 
-}
+# }
 
-module "dockerKey-pair" {
-  source = "./key-pair"
-  key_name ="dockerkeypair" 
-  publickeyInstance = file("~/.ssh/docker.pub")
-}
+# module "dockerKey-pair" {
+#   source = "./key-pair"
+#   key_name ="dockerkeypair" 
+#   publickeyInstance = file("~/.ssh/docker.pub")
+# }
 
 # module "DockerServer" {
 #   source                        = "./Instance"
